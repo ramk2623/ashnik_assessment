@@ -1,5 +1,5 @@
 pipeline {
-	agent node ansible {
+	agent node Ansible {
 		stages {
 			stage ('Deploy in Ansible'){
 				steps {
