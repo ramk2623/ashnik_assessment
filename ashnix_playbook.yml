@@ -15,14 +15,14 @@
   
 - name: Copy config file
   copy:
-    src: 
-    dest:
+    src: /$HOME/ashnik_assessment/nginx.conf
+    dest: /$HOME/roles/ashnik_assessment/templates/nginx_conf.j2
   delegate_to: 52.87.52.87
 
 - name: Replace the nginx config file
   template:
-    src:
-    dest:
+    src: /$HOME/roles/ashnik_assessment/templates/nginx_conf.j2
+    dest: /etc/nginx/nginx.conf
   notify:
     - Restart nginx
   handlers:
