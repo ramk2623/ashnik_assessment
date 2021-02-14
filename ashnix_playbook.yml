@@ -4,9 +4,9 @@
     pgrep nginx
   register: PID
   
-- name: check whether ngnix process running or not | if not then install NGNIX
+- name: check whether nginx process running or not | if not then install NGNIX
   apt:
-    - name: ngnix
+    - name: nginx
       become: yes
       state: enabled
   debug:
@@ -17,16 +17,16 @@
   copy:
     src: 
     dest:
-  delegate_to: ansible
+  delegate_to: 52.87.52.87
 
-- name: Replace the ngnix config file
+- name: Replace the nginx config file
   template:
     src:
     dest:
   notify:
-    - Restart ngnix
+    - Restart nginx
   handlers:
-    - name: Restart ngnix
+    - name: Restart nginx
       service: 
-        - name: ngnix
+        - name: nginx
           state: restarted
