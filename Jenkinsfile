@@ -1,5 +1,5 @@
-pipeline {
-	agent node Ansible {
+Pipeline {
+	agent label Ansible {
 		stages {
 			stage ('Deploy in Ansible'){
 				steps {
