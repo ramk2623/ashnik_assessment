@@ -1,0 +1,32 @@
+---
+- name: GREP process ID
+  shell: >
+    pgrep nginx
+  register: PID
+  
+- name: check whether ngnix process running or not | if not then install NGNIX
+  apt:
+    - name: ngnix
+      become: yes
+      state: enabled
+  debug:
+    msg: "Process is already running do nothing"
+  when: PID.results == false
+  
+- name: Copy config file
+  copy:
+    src: 
+    dest:
+  delegate_to: ansible
+
+- name: Replace the ngnix config file
+  template:
+    src:
+    dest:
+  notify:
+    - Restart ngnix
+  handlers:
+    - name: Restart ngnix
+      service: 
+        - name: ngnix
+          state: restarted
