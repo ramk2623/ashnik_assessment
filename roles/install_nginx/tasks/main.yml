@@ -1,0 +1,29 @@
+---
+- name: Check if Service Exists
+  stat: path=/lib/systemd/system/nginx.service
+  register: service_status
+
+- name: install nginx
+  apt: name=nginx update_cache=yes
+  when: service_status.stat.exists == false
+
+- name: Start Service
+  service: name=nginx state=started
+  when: service_status.stat.exists
+  register: start_status
+
+- name: Check difference between files
+  copy:
+    src: /home/ubuntu/ashnik_assessment/nginx.conf
+    dest: /etc/nginx/nginx.conf
+  check_mode: yes
+  diff: yes
+  when: start_status.state == "started"
+  register: difference
+
+- name: Change config file of NGINX
+  copy:
+    src: /home/ubuntu/ashnik_assessment/nginx.conf
+    dest: /etc/nginx/nginx.conf
+  delegate_to: "localhost"
+  when: difference.changed == true
