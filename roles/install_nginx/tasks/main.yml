@@ -23,7 +23,7 @@
 
 - name: Change config file of NGINX
   copy:
-    src: /home/ubuntu/ashnik_assessment/nginx.conf
+    src: /home/ubuntu/Workspace/nginx.conf
     dest: /etc/nginx/nginx.conf
   delegate_to: "localhost"
   when: difference.changed == true
