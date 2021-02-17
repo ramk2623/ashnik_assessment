@@ -14,7 +14,7 @@
 
 - name: Check difference between files
   copy:
-    src: /home/ubuntu/ashnik_assessment/nginx.conf
+    src: /home/ubuntu/Workspace/nginx.conf
     dest: /etc/nginx/nginx.conf
   check_mode: yes
   diff: yes
