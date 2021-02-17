@@ -1,8 +1,8 @@
 pipeline {
     agent {
         node {
-            label "Ansible" 
-            customWorkspace '/home/ubuntu/workspace'    
+            label "ansible" 
+            customWorkspace '/home/ubuntu/Workspace'    
         }
     }
     stages {
@@ -13,7 +13,7 @@ pipeline {
 	    }
 		stage ('Deploy in Ansible'){
 			steps {
-				ansiblePlaybook colorized: true, credentialsId: '52.87.52.87', installation: 'Ansible_Cloud', inventory: '/home/ubuntu/inventory_nginx', playbook: '/home/ubuntu/ngnix_deploy.yml'
+				sh 'ansible-playbook -i /etc/ansible/hosts /home/ubuntu/Workspace/ashnik_playbook.yml'
 		    }
 	    }
     }
